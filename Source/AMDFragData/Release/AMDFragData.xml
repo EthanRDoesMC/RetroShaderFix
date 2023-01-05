@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE psarc SYSTEM "..\..\psarc.dtd">
+
+<psarc>
+  <create archive="Release.AMDFragData.pak" overwrite="true">
+    <directory path=".\SHADERS" />
+  </create>
+</psarc>
