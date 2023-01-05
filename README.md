@@ -19,8 +19,6 @@ Run `Build.bat` in the `/Source` folder. The `.pak`s will be in each respective 
 ## Quick Links
 - NMS “retro” versions installation guide on https://nomansskyretro.com/
 
-Thank you to `@NotBeginner#7855` and `@Bowi#1176` for helping me test these patches! Couldn’t have done it without y’all <3
-
 - - - -
 # NVIDIA FragData Shader Fix
 This patch, for No Man’s Sky Foundations 1.10 through No Man’s Sky Pathfinder 1.24, fixes the errors that result in only the game’s UI being rendered. It is not needed for 1.09 and earlier, or 1.30 and later. 
