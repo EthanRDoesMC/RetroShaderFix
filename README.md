@@ -9,7 +9,7 @@ These patches are designed to modify as little as possible. Every change is docu
 If you encounter any shader errors, please let me know! The `SHADERERRORDUMP.txt` file in `/GAMEDATA` is extremely helpful for fixing broken shaders. (Ironically enough, the more broken a shader is, the more easily I can fix it.)
 
 ## How to install
-Get the pak(s) you need from the Releases page.
+Get the pak(s) you need from the [Releases](https://github.com/EthanRDoesMC/RetroShaderFix/releases) page.
 - For version 1.10 and older, place the .pak in `/GAMEDATA/PCBANKS`. Then, go back to `/GAMEDATA` and delete `/SHADERCACHE`. You're done!
 - For version 1.12 and newer, go to `/GAMEDATA/PCBANKS` and delete (or rename) `DISABLEMODS.TXT`. Then, in the same folder, create a new folder called `MODS`. Place the .pak in there, then head back to `/GAMEDATA` and delete `/SHADERCACHE`. You're done!
 
