@@ -10,6 +10,7 @@
 #ifdef D_PLATFORM_PC
 
     #pragma optionNV(strict on)
+	#extension GL_EXT_gpu_shader4 : enable
     #extension GL_ARB_gpu_shader5 : enable
     #extension GL_ARB_fragment_coord_conventions : enable
 

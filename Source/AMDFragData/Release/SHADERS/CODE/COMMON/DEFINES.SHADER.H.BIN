@@ -1,8 +1,14 @@
 // =================================================================================================
-
+#version 450 core
 #ifndef D_DEFINES
 #define D_DEFINES
 
+// =================================================================================================
+// RetroShaderFix by EthanRDoesMC
+// https://github.com/ethanrdoesmc/retroshaderfix
+// AMDFragData for NMS Release (1.03-1.09)
+// If you see this as part of a shader error dump, please let me know!
+// =================================================================================================
 
 // =================================================================================================
 // Platform defines
@@ -12,6 +18,7 @@
     #pragma optionNV(strict on)
     #extension GL_ARB_gpu_shader5 : enable
     #extension GL_ARB_fragment_coord_conventions : enable
+    #extension GL_EXT_texture_array : enable
 
 	#ifndef D_PLATFORM_PC_LOWEND
 	#extension GL_ARB_derivative_control : enable
@@ -252,10 +259,10 @@
     #define INPUT_NOINTERP(   TYPE, NAME, REG )      in    TYPE NAME;
     #define OUTPUT(  TYPE, NAME, REG )      out   TYPE NAME;
     
-	#define FRAGMENT_COLOUR_UVEC4_DEFINE    layout(location = 0) out uvec4 outu_color0
+	#define FRAGMENT_COLOUR_UVEC4_DEFINE    layout(location = 0) out uvec4 outu_color0;
 	#define FRAGMENT_COLOUR_UVEC4           outu_color0
 
-#ifdef D_PLATFORM_PC_LOWEND
+//#ifdef D_PLATFORM_PC_LOWEND
 
 	#define FRAGMENT_COLOUR                 out_color0
 	#define FRAGMENT_COLOUR0                out_color0
@@ -268,16 +275,16 @@
 		#define FRAGMENT_COLOUR_VEC4_DEFINE     layout(location = 0) out vec4 out_color0;  layout(location = 1) out vec4 out_color1;  layout(location = 2) out vec4 out_color2; layout(location = 3) out vec4 out_color3;
 	#endif
 
-#else
-
-	#define FRAGMENT_COLOUR                 gl_FragData[ 0 ]
-    #define FRAGMENT_COLOUR0                gl_FragData[ 0 ]
-    #define FRAGMENT_COLOUR1                gl_FragData[ 1 ]
-    #define FRAGMENT_COLOUR2                gl_FragData[ 2 ]
-    #define FRAGMENT_COLOUR3                gl_FragData[ 3 ]
-	#define FRAGMENT_COLOUR_VEC4_DEFINE  
-
-#endif
+//#else
+//
+//	#define FRAGMENT_COLOUR                 gl_FragData[ 0 ]
+//    #define FRAGMENT_COLOUR0                gl_FragData[ 0 ]
+//    #define FRAGMENT_COLOUR1                gl_FragData[ 1 ]
+//    #define FRAGMENT_COLOUR2                gl_FragData[ 2 ]
+//    #define FRAGMENT_COLOUR3                gl_FragData[ 3 ]
+//	#define FRAGMENT_COLOUR_VEC4_DEFINE  
+//
+//#endif
     #define FRAGMENT_DEPTH                  gl_FragDepth
 
     #define IN(  VAR )                      VAR
@@ -342,6 +349,8 @@
     #define FRAGMENT_MAIN_COLOUR_DEPTH_LE_SRT   FRAGMENT_COLOUR_VEC4_DEFINE uniform UniformBuffer lUniforms; void main( void )
     #define FRAGMENT_MAIN_COLOUR_SRT            FRAGMENT_COLOUR_VEC4_DEFINE uniform UniformBuffer lUniforms; void main( void )
     #define FRAGMENT_MAIN_COLOUR_EARLYZ_SRT     FRAGMENT_COLOUR_VEC4_DEFINE uniform UniformBuffer lUniforms; void main( void )
+	
+	#define FRAGMENT_MAIN_UICOLOUR_SRT          FRAGMENT_COLOUR_UVEC4_DEFINE uniform UniformBuffer lUniforms; void main( void ) // [ethanrdoesmc] pulled straight out of atlas rises
 
     #define VOID_MAIN_COLOUR_SRT                FRAGMENT_COLOUR_VEC4_DEFINE uniform UniformBuffer lUniforms; void main( void )
 

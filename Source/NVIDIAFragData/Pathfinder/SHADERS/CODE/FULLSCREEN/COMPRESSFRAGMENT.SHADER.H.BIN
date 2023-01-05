@@ -26,7 +26,7 @@
 #ifdef D_PLATFORM_PC
 
 
-FRAGMENT_COLOUR_UVEC4_DEFINE;
+//FRAGMENT_COLOUR_UVEC4_DEFINE;
 
 struct cInput
 {
@@ -563,7 +563,7 @@ uint EmitIndicesDXT1_alpha(
 
 
 
-FRAGMENT_MAIN_COLOUR_SRT
+FRAGMENT_MAIN_UICOLOUR_SRT
 {
     int liMipLevel = int( lUniforms.mpCustomPerMesh->gTextureSizeMipLevelVec4.z + 0.5 );
 

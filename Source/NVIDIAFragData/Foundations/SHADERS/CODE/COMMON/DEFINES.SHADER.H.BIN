@@ -3,6 +3,11 @@
 #ifndef D_DEFINES
 #define D_DEFINES
 
+// =================================================================================================
+// Foundation Defines Shader Edit by EthanRDoesMC
+// If you see this as part of a shader error dump, please let me know!
+// =================================================================================================
+
 
 // =================================================================================================
 // Platform defines
@@ -147,7 +152,7 @@
     #define texture2DLod( T, C, N )         Tex2dLodFeedback( T, T##FB, C, N )  
     #define texture2DArray(  T, C )         Tex2dArrayFeedback( T, T##FB, C )
 
-    #define texture3D( S, UV )           Tex3deedback( S, S##FB, UV )
+    #define texture3D( S, UV )              Tex3dFeedback( S, S##FB, UV ) // [ethanrdoesmc] misspelled in original defines shader
     #define texture3DLod( S, UV, LOD )      Tex3dLodFeedback( S, S##FB, UV, LOD )
 
     #define SAMPLER2DARG( NAME )            in sampler2D NAME, in int NAME##FB
@@ -289,10 +294,10 @@
     #define OUTPUT(  TYPE, NAME, REG )      out   TYPE NAME;
     #define OUTPUT_NOINTERP(  TYPE, NAME, REG )      out   TYPE NAME;
     
-	#define FRAGMENT_COLOUR_UVEC4_DEFINE    layout(location = 0) out uvec4 outu_color0
+	#define FRAGMENT_COLOUR_UVEC4_DEFINE    layout(location = 0) out uvec4 outu_color0;
 	#define FRAGMENT_COLOUR_UVEC4           outu_color0
 
-#ifdef D_PLATFORM_PC_LOWEND
+//#ifdef D_PLATFORM_PC_LOWEND
 
 	#define FRAGMENT_COLOUR                 out_color0
 	#define FRAGMENT_COLOUR0                out_color0
@@ -309,18 +314,19 @@
 	#endif    
     #define FRAGMENT_COLOUR01_VEC4_DEFINE       layout(location = 0) out vec4 out_color0;  layout(location = 1) out vec4 out_color1;
 
-#else
-
-	#define FRAGMENT_COLOUR                 gl_FragData[ 0 ]
-    #define FRAGMENT_COLOUR0                gl_FragData[ 0 ]
-    #define FRAGMENT_COLOUR1                gl_FragData[ 1 ]
-    #define FRAGMENT_COLOUR2                gl_FragData[ 2 ]
-    #define FRAGMENT_COLOUR3                gl_FragData[ 3 ]
-    #define FRAGMENT_COLOUR4                gl_FragData[ 4 ]
-	#define FRAGMENT_COLOUR_VEC4_DEFINE  
-    #define FRAGMENT_COLOUR01_VEC4_DEFINE  
-
-#endif
+    // [ethanrdoesmc] this section is commented out in Atlas Rises defines, hopefully this will resolve any issues with NVidia
+//#else
+//
+//	#define FRAGMENT_COLOUR                 gl_FragData[ 0 ]
+//    #define FRAGMENT_COLOUR0                gl_FragData[ 0 ]
+//    #define FRAGMENT_COLOUR1                gl_FragData[ 1 ]
+//    #define FRAGMENT_COLOUR2                gl_FragData[ 2 ]
+//    #define FRAGMENT_COLOUR3                gl_FragData[ 3 ]
+//    #define FRAGMENT_COLOUR4                gl_FragData[ 4 ]
+//	#define FRAGMENT_COLOUR_VEC4_DEFINE  
+//    #define FRAGMENT_COLOUR01_VEC4_DEFINE  
+//
+//#endif
     #define FRAGMENT_DEPTH                  gl_FragDepth
     #define FRAGMENT_FRONTFACE              gl_FrontFacing
     #define INPUT_FRONTFACING
@@ -395,72 +401,75 @@
     #define FRAGMENT_MAIN_COLOUR_EARLYZ_SRT     FRAGMENT_COLOUR_VEC4_DEFINE uniform UniformBuffer lUniforms; void main( void )
 
     #define VOID_MAIN_COLOUR_SRT                FRAGMENT_COLOUR_VEC4_DEFINE uniform UniformBuffer lUniforms; void main( void )
+	
+	#define FRAGMENT_MAIN_UICOLOUR_SRT          FRAGMENT_COLOUR_UVEC4_DEFINE uniform UniformBuffer lUniforms; void main( void ) // [ethanrdoesmc] pulled straight out of atlas rises
 
     #define FRAGMENT_MAIN_COLOUR01_SRT          FRAGMENT_COLOUR01_VEC4_DEFINE uniform UniformBuffer lUniforms; void main( void )
     #define FRAGMENT_MAIN_COLOUR01_DEPTH_SRT    FRAGMENT_COLOUR01_VEC4_DEFINE uniform UniformBuffer lUniforms; void main( void )
 
+    // [ethanrdoesmc] not relevant to PC and was throwing off my error checker, so commented out.
 
-#elif defined( D_PLATFORM_ORBIS )
-
-    #define VERTEX_MAIN                     void main( cInput In, out cOutput Out )
-    #define VERTEX_MAIN_SRT                 void main( cInput In, out cOutput Out, UniformBuffer lUniforms : S_SRT_DATA  )
-
-
-#define FRAGMENT_MAIN_COLOUR            struct cOutput { vec4  mColour : S_TARGET_OUTPUT; };									[RE_Z] void main( cInput In, out cOutput Out )
-#define VOID_MAIN_COLOUR                struct cOutput { vec4  mColour : S_TARGET_OUTPUT; };									       void main( cInput In, out cOutput Out )
-#define FRAGMENT_MAIN_COLOUR_DEPTH      struct cOutput { vec4  mColour : S_TARGET_OUTPUT; float mDepth  : S_DEPTH_OUTPUT; };	[RE_Z] void main( cInput In, out cOutput Out )
-    
-    #if defined( D_TAA_RENDER_TARGETS )
-
-        #define FRAGMENT_MAIN_COLOUR_SRT        struct cOutput { vec4  mColour0 : S_TARGET_OUTPUT0;    \
-                                                                 vec4  mColour1 : S_TARGET_OUTPUT1;    \
-                                                                 vec4  mColour2 : S_TARGET_OUTPUT2; }; \
-                                                [RE_Z] void main( cInput In, out cOutput Out, UniformBuffer lUniforms : S_SRT_DATA )
-
-
-    #elif !defined( D_ATTRIBUTES )
-#define FRAGMENT_MAIN_COLOUR_DEPTH_SRT     struct cOutput { vec4 mColour : S_TARGET_OUTPUT; float mDepth : S_DEPTH_OUTPUT;    }; [RE_Z] void main( cInput In, out cOutput Out, UniformBuffer lUniforms : S_SRT_DATA  )
-#define FRAGMENT_MAIN_COLOUR_DEPTH_GE_SRT  struct cOutput { vec4 mColour : S_TARGET_OUTPUT; float mDepth : S_DEPTH_GE_OUTPUT; }; [RE_Z] void main( cInput In, out cOutput Out, UniformBuffer lUniforms : S_SRT_DATA  )
-#define FRAGMENT_MAIN_COLOUR_DEPTH_LE_SRT  struct cOutput { vec4 mColour : S_TARGET_OUTPUT; float mDepth : S_DEPTH_LE_OUTPUT; }; [RE_Z] void main( cInput In, out cOutput Out, UniformBuffer lUniforms : S_SRT_DATA  )
-#define FRAGMENT_MAIN_COLOUR_SRT           struct cOutput { vec4  mColour : S_TARGET_OUTPUT; };	                                        void main( cInput In, out cOutput Out, UniformBuffer lUniforms : S_SRT_DATA )
-#define VOID_MAIN_COLOUR_SRT            	                                													       void main( cInput In, UniformBuffer lUniforms : S_SRT_DATA )
-#define VOID_MAIN_COLOUR_EARLYZ_SRT        	                                								[FORCE_EARLY_DEPTH_STENCIL]void main( cInput In, UniformBuffer lUniforms : S_SRT_DATA )
-	
-#define FRAGMENT_MAIN_COLOUR01_SRT         struct cOutput { vec4  mColour0 : S_TARGET_OUTPUT0;    \
-                                                            vec4  mColour1 : S_TARGET_OUTPUT1; }; \
-                                                [RE_Z] void main( cInput In, out cOutput Out, UniformBuffer lUniforms : S_SRT_DATA )
-#define FRAGMENT_MAIN_COLOUR01_DEPTH_SRT   struct cOutput { vec4  mColour0 : S_TARGET_OUTPUT0;  \
-                                                            vec4  mColour1 : S_TARGET_OUTPUT1;  \
-                                                            float mDepth   : S_DEPTH_OUTPUT; }; \
-                                                [RE_Z] void main( cInput In, out cOutput Out, UniformBuffer lUniforms : S_SRT_DATA  )
-
-    #else
-    	
-    	#pragma PSSL_target_output_format(target 1 FMT_32_AR)
-    
-        #define FRAGMENT_MAIN_COLOUR_DEPTH_SRT  struct cOutput { vec4  mColour0 : S_TARGET_OUTPUT0;  \
-                                                                 vec4  mColour1 : S_TARGET_OUTPUT1;  \
-                                                                 vec4  mColour2 : S_TARGET_OUTPUT2;  \
-                                                                 vec4  mColour3 : S_TARGET_OUTPUT3;  \
-                                                                 vec4  mColour4 : S_TARGET_OUTPUT4;  \
-                                                                 float mDepth   : S_DEPTH_OUTPUT; }; \
-                                                [RE_Z] void main( cInput In, out cOutput Out, UniformBuffer lUniforms : S_SRT_DATA  )
-
-        #define FRAGMENT_MAIN_COLOUR_SRT        struct cOutput { vec4  mColour0 : S_TARGET_OUTPUT0;    \
-                                                                 vec4  mColour1 : S_TARGET_OUTPUT1;    \
-                                                                 vec4  mColour2 : S_TARGET_OUTPUT2;    \
-                                                                 vec4  mColour3 : S_TARGET_OUTPUT3;    \
-                                                                 vec4  mColour4 : S_TARGET_OUTPUT4; }; \
-                                                [RE_Z] void main( cInput In, out cOutput Out, UniformBuffer lUniforms : S_SRT_DATA )
-                                                    
-        #define FRAGMENT_MAIN_COLOUR_EARLYZ_SRT        struct cOutput { vec4  mColour0 : S_TARGET_OUTPUT0;    \
-                                                                 vec4  mColour1 : S_TARGET_OUTPUT1;    \
-                                                                 vec4  mColour2 : S_TARGET_OUTPUT2;    \
-                                                                 vec4  mColour3 : S_TARGET_OUTPUT3;    \
-                                                                 vec4  mColour4 : S_TARGET_OUTPUT4; }; \
-                                                [FORCE_EARLY_DEPTH_STENCIL] void main( cInput In, out cOutput Out, UniformBuffer lUniforms : S_SRT_DATA )                                                    
-    #endif
-
+//#elif defined( D_PLATFORM_ORBIS )
+//
+//    #define VERTEX_MAIN                     void main( cInput In, out cOutput Out )
+//    #define VERTEX_MAIN_SRT                 void main( cInput In, out cOutput Out, UniformBuffer lUniforms : S_SRT_DATA  )
+//
+//
+//#define FRAGMENT_MAIN_COLOUR            struct cOutput { vec4  mColour : S_TARGET_OUTPUT; };									[RE_Z] void main( cInput In, out cOutput Out )
+//#define VOID_MAIN_COLOUR                struct cOutput { vec4  mColour : S_TARGET_OUTPUT; };									       void main( cInput In, out cOutput Out )
+//#define FRAGMENT_MAIN_COLOUR_DEPTH      struct cOutput { vec4  mColour : S_TARGET_OUTPUT; float mDepth  : S_DEPTH_OUTPUT; };	[RE_Z] void main( cInput In, out cOutput Out )
+//    
+//    #if defined( D_TAA_RENDER_TARGETS )
+//
+//        #define FRAGMENT_MAIN_COLOUR_SRT        struct cOutput { vec4  mColour0 : S_TARGET_OUTPUT0;    \
+//                                                                 vec4  mColour1 : S_TARGET_OUTPUT1;    \
+//                                                                 vec4  mColour2 : S_TARGET_OUTPUT2; }; \
+//                                                [RE_Z] void main( cInput In, out cOutput Out, UniformBuffer lUniforms : S_SRT_DATA )
+//
+//
+//    #elif !defined( D_ATTRIBUTES )
+//#define FRAGMENT_MAIN_COLOUR_DEPTH_SRT     struct cOutput { vec4 mColour : S_TARGET_OUTPUT; float mDepth : S_DEPTH_OUTPUT;    }; [RE_Z] void main( cInput In, out cOutput Out, UniformBuffer lUniforms : S_SRT_DATA  )
+//#define FRAGMENT_MAIN_COLOUR_DEPTH_GE_SRT  struct cOutput { vec4 mColour : S_TARGET_OUTPUT; float mDepth : S_DEPTH_GE_OUTPUT; }; [RE_Z] void main( cInput In, out cOutput Out, UniformBuffer lUniforms : S_SRT_DATA  )
+//#define FRAGMENT_MAIN_COLOUR_DEPTH_LE_SRT  struct cOutput { vec4 mColour : S_TARGET_OUTPUT; float mDepth : S_DEPTH_LE_OUTPUT; }; [RE_Z] void main( cInput In, out cOutput Out, UniformBuffer lUniforms : S_SRT_DATA  )
+//#define FRAGMENT_MAIN_COLOUR_SRT           struct cOutput { vec4  mColour : S_TARGET_OUTPUT; };	                                        void main( cInput In, out cOutput Out, UniformBuffer lUniforms : S_SRT_DATA )
+//#define VOID_MAIN_COLOUR_SRT            	                                													       void main( cInput In, UniformBuffer lUniforms : S_SRT_DATA )
+//#define VOID_MAIN_COLOUR_EARLYZ_SRT        	                                								[FORCE_EARLY_DEPTH_STENCIL]void main( cInput In, UniformBuffer lUniforms : S_SRT_DATA )
+//	
+//#define FRAGMENT_MAIN_COLOUR01_SRT         struct cOutput { vec4  mColour0 : S_TARGET_OUTPUT0;    \
+//                                                            vec4  mColour1 : S_TARGET_OUTPUT1; }; \
+//                                                [RE_Z] void main( cInput In, out cOutput Out, UniformBuffer lUniforms : S_SRT_DATA )
+//#define FRAGMENT_MAIN_COLOUR01_DEPTH_SRT   struct cOutput { vec4  mColour0 : S_TARGET_OUTPUT0;  \
+//                                                            vec4  mColour1 : S_TARGET_OUTPUT1;  \
+//                                                            float mDepth   : S_DEPTH_OUTPUT; }; \
+//                                                [RE_Z] void main( cInput In, out cOutput Out, UniformBuffer lUniforms : S_SRT_DATA  )
+//
+//    #else
+//    	
+//    	#pragma PSSL_target_output_format(target 1 FMT_32_AR)
+//    
+//        #define FRAGMENT_MAIN_COLOUR_DEPTH_SRT  struct cOutput { vec4  mColour0 : S_TARGET_OUTPUT0;  \
+//                                                                 vec4  mColour1 : S_TARGET_OUTPUT1;  \
+//                                                                 vec4  mColour2 : S_TARGET_OUTPUT2;  \
+//                                                                 vec4  mColour3 : S_TARGET_OUTPUT3;  \
+//                                                                 vec4  mColour4 : S_TARGET_OUTPUT4;  \
+//                                                                 float mDepth   : S_DEPTH_OUTPUT; }; \
+//                                                [RE_Z] void main( cInput In, out cOutput Out, UniformBuffer lUniforms : S_SRT_DATA  )
+//
+//        #define FRAGMENT_MAIN_COLOUR_SRT        struct cOutput { vec4  mColour0 : S_TARGET_OUTPUT0;    \
+//                                                                 vec4  mColour1 : S_TARGET_OUTPUT1;    \
+//                                                                 vec4  mColour2 : S_TARGET_OUTPUT2;    \
+//                                                                 vec4  mColour3 : S_TARGET_OUTPUT3;    \
+//                                                                 vec4  mColour4 : S_TARGET_OUTPUT4; }; \
+//                                                [RE_Z] void main( cInput In, out cOutput Out, UniformBuffer lUniforms : S_SRT_DATA )
+//                                                    
+//        #define FRAGMENT_MAIN_COLOUR_EARLYZ_SRT        struct cOutput { vec4  mColour0 : S_TARGET_OUTPUT0;    \
+//                                                                 vec4  mColour1 : S_TARGET_OUTPUT1;    \
+//                                                                 vec4  mColour2 : S_TARGET_OUTPUT2;    \
+//                                                                 vec4  mColour3 : S_TARGET_OUTPUT3;    \
+//                                                                 vec4  mColour4 : S_TARGET_OUTPUT4; }; \
+//                                                [FORCE_EARLY_DEPTH_STENCIL] void main( cInput In, out cOutput Out, UniformBuffer lUniforms : S_SRT_DATA )                                                    
+//    #endif
+//
 
 #endif
 
@@ -476,7 +485,7 @@ uvec2 GetResolution( Texture2D lTexture )
     return lResolution;
 }
 #else
-uvec2 GetResolution( sampler2D lTexture )
+uvec2 GetResolution( sampler2D lTexture ) // [ethanrdoesmc] vs glsl extension reports no matching overloaded function??
 {
     return textureSize( lTexture, 0 );
 }
