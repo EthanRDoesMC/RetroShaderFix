@@ -27,6 +27,8 @@ It was developed by taking code from NMS 1.38 that resolves the issue, so there 
 
 **Files affected:** `/SHADERS/CODE/COMMON/DEFINES.SHADER.H.BIN`, `/SHADERS/CODE/FULLSCREEN/COMPRESSFRAGMENT.SHADER.H.BIN`
 
+**Paks:** `(Foundations/Pathfinder).NVIDIAFragData.pak`
+
 *Make sure to download the appropriate pak for your version of the game!*
 
 # AMD Shader Fixes
@@ -37,6 +39,8 @@ This patch can be applied to any version from 1.03 to 1.24. The same file works 
 
 **Files affected:** `/PIPELINES/PIPELINESPACEMAP.BIN`
 
+**Pak:** `Universal.AMDSpaceMapHorizon.pak`
+
 ## Invisible Terrain and Textures Fix
 
 ### Release 1.03-1.09
@@ -44,10 +48,14 @@ This patch is more akin to the NVIDIA shader patch in terms of changes made, plu
 
 **Files affected:** `/SHADERS/CODE/COMMON/DEFINES.SHADER.H.BIN`, `/SHADERS/CODE/FULLSCREEN/COMPRESSFRAGMENT.SHADER.H.BIN`.
 
+**Pak:** `Release.AMDFragData.pak`
+
 ### Texture Array Fix (1.10-1.24)
 This patch adds a single missing GLSL extension to the DEFINES shader. It fixes invisible terrain and other missing textures. 
 
 **Files affected:** `/SHADERS/CODE/COMMON/DEFINES.SHADER.H.BIN`.
+
+**Paks:** `(Foundations/Pathfinder).AMDTextureArray.pak`
 
 *Make sure to download the appropriate pak for your version of the game!*
 
@@ -55,3 +63,5 @@ This patch adds a single missing GLSL extension to the DEFINES shader. It fixes 
 This patch adds a single missing GLSL extension to the DEFINES shader and removes some compute code that only works on the PS4, as the new AMD drivers throw a syntax error even though the code never runs on PC.
 
 **Files affected:** `/SHADERS/CODE/COMMON/DEFINES.SHADER.H.BIN`
+
+**Pak:** `AtlasRises.AMDTextureArray.pak`
