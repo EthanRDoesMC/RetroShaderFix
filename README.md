@@ -18,21 +18,26 @@ Get the pak(s) you need from the Releases page.
 - NMS “retro” versions installation guide on https://nomansskyretro.com/
 
 - - - -
-# NVIDIA Shader Fix
-This patch, for No Man’s Sky Foundations 1.10 through No Man’s Sky Pathfinder 1.24, fixes the errors that result in only the game’s UI being rendered. It is not needed for 1.09 and earlier, or 1.30 and later. It updates the DEFINES shader to not use `gl_FragData` (which has been deprecated), fixes a syntax error, and updates another shader affected by those changes. It was developed by taking code from NMS 1.38 that resolves the issue, so there shouldn’t be any side effects. 
+# NVIDIA FragData Shader Fix
+This patch, for No Man’s Sky Foundations 1.10 through No Man’s Sky Pathfinder 1.24, fixes the errors that result in only the game’s UI being rendered. It is not needed for 1.09 and earlier, or 1.30 and later. 
+It updates the DEFINES shader to not use `gl_FragData` (which has been deprecated), fixes a syntax error, and updates another shader affected by those changes. 
+It was developed by taking code from NMS 1.38 that resolves the issue, so there shouldn’t be any side effects. 
 
-**Files affected:** `/SHADERS/CODE/COMMON/DEFINES.SHADER.H.BIN`, `/SHADERS/CODE/FULLSCREEN/COMPRESSFRAGMENT.SHADER.H.BIN`.
+**Files affected:** `/SHADERS/CODE/COMMON/DEFINES.SHADER.H.BIN`, `/SHADERS/CODE/FULLSCREEN/COMPRESSFRAGMENT.SHADER.H.BIN`
+
+*Make sure to download the appropriate pak for your version of the game!*
 
 # AMD Shader Fixes
 ## Space Map Horizon Fix
-This patch fixes an issue in the SpaceMap pipeline that causes the “horizon” of the space map (the red “radar” effect) to not render correctly. This patch can be applied to any version from 1.03 to 1.24 (1.30 and later use a completely different space map). 
+This patch fixes an issue in the SpaceMap pipeline that causes the “horizon” of the space map (the red “radar” effect) to not render correctly. 
+
+This patch can be applied to any version from 1.03 to 1.24. The same file works for all of them. 1.30 and later use a completely different space map, so they don't need it.
 
 **Files affected:** `/PIPELINES/PIPELINESPACEMAP.BIN`
 
 ## Invisible Terrain and Textures Fix
 
 ### Release 1.03-1.09
-
 This patch is more akin to the NVIDIA shader patch in terms of changes made, plus a missing GLSL extension. It fixes invisible terrain, incorrect coloring, and missing textures. 
 
 **Files affected:** `/SHADERS/CODE/COMMON/DEFINES.SHADER.H.BIN`, `/SHADERS/CODE/FULLSCREEN/COMPRESSFRAGMENT.SHADER.H.BIN`.
@@ -42,7 +47,7 @@ This patch adds a single missing GLSL extension to the DEFINES shader. It fixes 
 
 **Files affected:** `/SHADERS/CODE/COMMON/DEFINES.SHADER.H.BIN`.
 
-Make sure to download the appropriate pak for your version of the game!
+*Make sure to download the appropriate pak for your version of the game!*
 
 ### Texture Array and Hexadecimal Literal Fix (1.30-1.38)
 This patch adds a single missing GLSL extension to the DEFINES shader and removes some compute code that only works on the PS4, as the new AMD drivers throw a syntax error even though the code never runs on PC.
