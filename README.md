@@ -13,6 +13,9 @@ Get the pak(s) you need from the Releases page.
 - For version 1.10 and older, place the .pak in `/GAMEDATA/PCBANKS`. Then, go back to `/GAMEDATA` and delete `/SHADERCACHE`. You're done!
 - For version 1.12 and newer, go to `/GAMEDATA/PCBANKS` and delete (or rename) `DISABLEMODS.TXT`. Then, in the same folder, create a new folder called `MODS`. Place the .pak in there, then head back to `/GAMEDATA` and delete `/SHADERCACHE`. You're done!
 
+## How to build
+Run `Build.bat` in the `/Source` folder. The `.pak`s will be in each respective folder.
+
 ## Quick Links
 - NMS “retro” versions installation guide on https://nomansskyretro.com/
 
