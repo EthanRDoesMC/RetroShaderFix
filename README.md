@@ -44,7 +44,7 @@ This patch can be applied to any version from 1.03 to 1.24. The same file works 
 ## Invisible Terrain and Textures Fix
 
 | Before | After |
-| - - -  | - - - |
+| ---  | --- |
 | ![Before the fix. No terrain visible. Other objects missing textures.](https://raw.githubusercontent.com/EthanRDoesMC/RetroShaderFix/main/docs/AMDTerrainBefore.png) | ![After the fix. Terrain visible. No missing textures.](https://raw.githubusercontent.com/EthanRDoesMC/RetroShaderFix/main/docs/AMDTerrainAfter.png) |
 
 ### Release 1.03-1.09
