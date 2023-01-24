@@ -13,6 +13,8 @@ Get the pak(s) you need from the [Releases](https://github.com/EthanRDoesMC/Retr
 - For version 1.10 and older, place the .pak in `/GAMEDATA/PCBANKS`. Then, go back to `/GAMEDATA` and delete `/SHADERCACHE`. You're done!
 - For version 1.12 and newer, go to `/GAMEDATA/PCBANKS` and delete (or rename) `DISABLEMODS.TXT`. Then, in the same folder, create a new folder called `MODS`. Place the .pak in there, then head back to `/GAMEDATA` and delete `/SHADERCACHE`. You're done!
 
+Note: If you're using other mods, and the patch stops working, then you'll need to make sure that the patch is the last file in the MODS folder *when sorted alphabetically*. This especially applies with RaYRoD's Overhaul; just keep adding `z` to the beginning of the patch's file name until it's last in order, ie `zzAtlasRises.AMDTextureArray.pak`, keep adding z's. :P
+
 ## How to build
 Run `Build.bat` in the `/Source` folder. The `.pak`s will be in each respective folder.
 
