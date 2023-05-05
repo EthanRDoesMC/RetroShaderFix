@@ -1,0 +1,2 @@
+# tell GitHub about NMS being special with file extensions
+*.SHADER*.BIN linguist-language=GLSL
