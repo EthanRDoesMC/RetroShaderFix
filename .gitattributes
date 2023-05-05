@@ -1,2 +1,9 @@
-# tell GitHub about NMS being special with file extensions
+# No Man's Sky gitattributes
+
+
+# This captures all shader files
+# most have a .h in the extension between shader and bin
 *.SHADER*.BIN linguist-language=GLSL
+
+# all pipeline files begin with pipeline
+PIPELINE*.BIN linguist-language=XML
