@@ -21,6 +21,21 @@ Run `Build.bat` in the `/Source` folder. The `.pak`s will be in each respective 
 ## Quick Links
 - NMS “retro” versions installation guide on https://nomansskyretro.com/
 
+# TL;DR
+- If you have AMD:
+ - On 1.0x Release versions, get Release.AMDFragData.pak
+ - On 1.1x Foundations versions, get Foundations.AMDTextureArray.pak
+ - On 1.2x Pathfinder versions, get Pathfinder.AMDTextureArray.pak
+ - On 1.3x Atlas Rises versions, get AtlasRises.AMDTextureArray.pak
+ - **For versions 1.0x - 1.2x, get Universal.AMDSpaceMapHorizon.pak**
+- If you have NVIDIA:
+ - on 1.1x Foundations versions, get Foundations.NVIDIAFragData.pak
+ - on 1.2x Pathfinder versions, get Pathfinder.NVIDIAFragData.pak
+- On versions older than 1.12, make sure your paks are in PCBANKS, not MODS. This applies to all paks for these versions!
+ - Additionally, ensure that paks are named such that they come alphabetically after the vanilla paks.
+- If the fix stops working after installing other mods, make sure the fix is the last thing to load
+ - adding a few "z"s to the beginning of the file name should do it
+
 - - - -
 # NVIDIA FragData Shader Fix
 This patch, for No Man’s Sky Foundations 1.10 through No Man’s Sky Pathfinder 1.24, fixes the errors that result in only the game’s UI being rendered. It is not needed for 1.09 and earlier, or 1.30 and later. 
