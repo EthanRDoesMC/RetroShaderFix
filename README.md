@@ -26,7 +26,7 @@ Run `Build.bat` in the `/Source` folder. The `.pak`s will be in each respective 
   - On 1.0x Release versions, get Release.AMDFragData.pak
   - On 1.1x Foundations versions, get Foundations.AMDTextureArray.pak
   - On 1.2x Pathfinder versions, get Pathfinder.AMDTextureArray.pak
-  - For versions 1.0x - 1.2x, get Universal.AMDSpaceMapHorizon.pak
+  - For versions 1.0x - 1.2x, **also** get Universal.AMDSpaceMapHorizon.pak
   - On 1.3x Atlas Rises versions, get AtlasRises.AMDTextureArray.pak
 - If you have NVIDIA:
   - on 1.1x Foundations versions, get Foundations.NVIDIAFragData.pak
