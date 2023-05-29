@@ -349,9 +349,7 @@
     #define FRAGMENT_MAIN_COLOUR_DEPTH_LE_SRT   FRAGMENT_COLOUR_VEC4_DEFINE uniform UniformBuffer lUniforms; void main( void )
     #define FRAGMENT_MAIN_COLOUR_SRT            FRAGMENT_COLOUR_VEC4_DEFINE uniform UniformBuffer lUniforms; void main( void )
     #define FRAGMENT_MAIN_COLOUR_EARLYZ_SRT     FRAGMENT_COLOUR_VEC4_DEFINE uniform UniformBuffer lUniforms; void main( void )
-	
-	//#define FRAGMENT_MAIN_UICOLOUR_SRT          FRAGMENT_COLOUR_UVEC4_DEFINE uniform UniformBuffer lUniforms; void main( void ) // [ethanrdoesmc] pulled straight out of atlas rises
-// [ethan] hello ethan from the past, this is probably why ui is bugged for you
+
     #define VOID_MAIN_COLOUR_SRT                FRAGMENT_COLOUR_VEC4_DEFINE uniform UniformBuffer lUniforms; void main( void )
 
 #elif defined( D_PLATFORM_ORBIS )
