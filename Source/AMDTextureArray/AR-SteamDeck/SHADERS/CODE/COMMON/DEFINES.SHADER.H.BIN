@@ -205,8 +205,8 @@
     // RSF: texture2D does not seem to be present on Steam Deck. Might be because it's super old.
     // Using a macro to redirect it to its modern, overloaded equivalent
     // I patterened it after the shadow2D macro above
-    #define texture2D( S, UV )              texture( S, UV )
-    //#define texture2D( S, UV, bias )        texture( S, UV, bias )
+    //#define texture2D( S, UV )              texture( S, UV )
+    #define texture2D( S, UV, bias )        texture( S, UV, bias )
 
 #if defined( D_TEXTURE_FEEDBACK )
 
