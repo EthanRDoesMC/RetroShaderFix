@@ -18,8 +18,8 @@
 uniform sampler2D baseTexture;                              
 uniform float gfUserMipLevel;
 
-in vec4 color;                                     
-in vec2 texCoord;   
+varying vec4 color;                                     
+varying vec2 texCoord;   
 //varying vec2 depthVals;
 
 
