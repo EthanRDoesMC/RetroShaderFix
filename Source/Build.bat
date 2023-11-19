@@ -22,6 +22,10 @@ Pushd .\AtlasRises
 ..\..\psarc.exe --xml=AMDTextureArrayAR.xml
 Pushd ..
 
+Pushd .\AR-SteamDeck
+..\..\psarc.exe --xml=AMDTextureArrayAR.xml
+Pushd ..
+
 Pushd ..
 
 
