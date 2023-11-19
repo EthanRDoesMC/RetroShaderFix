@@ -10,7 +10,7 @@
 ///
 ////////////////////////////////////////////////////////////////////////////////
 
-#version 450 core
+#version 450 compatibility
 
 // RSF
 #define texture2DLod(S, P, LOD)         textureLod(S, P, LOD)
@@ -18,8 +18,8 @@
 uniform sampler2D baseTexture;                              
 uniform float gfUserMipLevel;
 
-varying vec4 color;                                     
-varying vec2 texCoord;   
+in vec4 color;                                     
+in vec2 texCoord;   
 //varying vec2 depthVals;
 
 
