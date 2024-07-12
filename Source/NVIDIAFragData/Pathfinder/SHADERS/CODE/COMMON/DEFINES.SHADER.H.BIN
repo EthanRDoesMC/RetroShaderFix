@@ -302,7 +302,7 @@
 	#define FRAGMENT_COLOUR_UVEC4_DEFINE    layout(location = 0) out uvec4 outu_color0;
 	#define FRAGMENT_COLOUR_UVEC4           outu_color0
 
-//#ifdef D_PLATFORM_PC_LOWEND
+#ifdef D_PLATFORM_PC_LOWEND
 
 	#define FRAGMENT_COLOUR                 out_color0
 	#define FRAGMENT_COLOUR0                out_color0
@@ -319,18 +319,24 @@
 	#endif    
     #define FRAGMENT_COLOUR01_VEC4_DEFINE       layout(location = 0) out vec4 out_color0;  layout(location = 1) out vec4 out_color1;
 
-//#else
-//
-//	#define FRAGMENT_COLOUR                 gl_FragData[ 0 ]
-//    #define FRAGMENT_COLOUR0                gl_FragData[ 0 ]
-//    #define FRAGMENT_COLOUR1                gl_FragData[ 1 ]
-//    #define FRAGMENT_COLOUR2                gl_FragData[ 2 ]
-//    #define FRAGMENT_COLOUR3                gl_FragData[ 3 ]
-//    #define FRAGMENT_COLOUR4                gl_FragData[ 4 ]
-//	#define FRAGMENT_COLOUR_VEC4_DEFINE  
-//    #define FRAGMENT_COLOUR01_VEC4_DEFINE  
-//
-//#endif
+#else
+
+	#define FRAGMENT_COLOUR                 out_color0
+    #define FRAGMENT_COLOUR0                out_color0
+    #define FRAGMENT_COLOUR1                out_color1
+    #define FRAGMENT_COLOUR2                out_color2
+    #define FRAGMENT_COLOUR3                out_color3
+    #define FRAGMENT_COLOUR4                out_color4
+    #if defined( D_TAA_RENDER_TARGETS )	
+		#define FRAGMENT_COLOUR_VEC4_DEFINE     layout(location = 0) out vec4 out_color0;  layout(location = 1) out vec4 out_color1;  layout(location = 2) out vec4 out_color2;	
+	#elif !defined(D_ATTRIBUTES)
+		#define FRAGMENT_COLOUR_VEC4_DEFINE     layout(location = 0) out vec4 out_color0;
+	#else
+		#define FRAGMENT_COLOUR_VEC4_DEFINE     layout(location = 0) out vec4 out_color0;  layout(location = 1) out vec4 out_color1;  layout(location = 2) out vec4 out_color2; layout(location = 3) out vec4 out_color3; layout(location = 4) out vec4 out_color4;
+	#endif    
+    #define FRAGMENT_COLOUR01_VEC4_DEFINE       layout(location = 0) out vec4 out_color0;  layout(location = 1) out vec4 out_color1;
+
+#endif
     #define FRAGMENT_DEPTH                  gl_FragDepth
     #define FRAGMENT_FRONTFACE              gl_FrontFacing
     #define INPUT_FRONTFACING
@@ -406,11 +412,10 @@
     #define FRAGMENT_MAIN_COLOUR_DEPTH_LE_SRT   FRAGMENT_COLOUR_VEC4_DEFINE uniform UniformBuffer lUniforms; void main( void )
     #define FRAGMENT_MAIN_COLOUR_SRT            FRAGMENT_COLOUR_VEC4_DEFINE uniform UniformBuffer lUniforms; void main( void )
     #define FRAGMENT_MAIN_COLOUR_EARLYZ_SRT     FRAGMENT_COLOUR_VEC4_DEFINE uniform UniformBuffer lUniforms; void main( void )
+    #define FRAGMENT_MAIN_UICOLOUR_SRT          FRAGMENT_COLOUR_UVEC4_DEFINE uniform UniformBuffer lUniforms; void main( void )
 
     #define VOID_MAIN_SRT                       FRAGMENT_COLOUR_VEC4_DEFINE uniform UniformBuffer lUniforms; void main( void )
     #define VOID_MAIN_DEPTH_SRT                 FRAGMENT_COLOUR_VEC4_DEFINE uniform UniformBuffer lUniforms; void main( void )
-
-    #define FRAGMENT_MAIN_UICOLOUR_SRT          FRAGMENT_COLOUR_UVEC4_DEFINE uniform UniformBuffer lUniforms; void main( void ) // [ethanrdoesmc] pulled straight out of atlas rises
 
     #define FRAGMENT_MAIN_COLOUR01_SRT          FRAGMENT_COLOUR01_VEC4_DEFINE uniform UniformBuffer lUniforms; void main( void )
     #define FRAGMENT_MAIN_COLOUR01_DEPTH_SRT    FRAGMENT_COLOUR01_VEC4_DEFINE uniform UniformBuffer lUniforms; void main( void )

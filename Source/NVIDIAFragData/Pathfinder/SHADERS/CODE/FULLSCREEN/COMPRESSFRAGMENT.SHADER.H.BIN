@@ -26,8 +26,6 @@
 #ifdef D_PLATFORM_PC
 
 
-//FRAGMENT_COLOUR_UVEC4_DEFINE;
-
 struct cInput
 {
     float Test;
